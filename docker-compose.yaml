@@ -7,18 +7,17 @@ services:
       target: bolt-ai-production
     ports:
       - "5173:5173"
-    env_file: ".env.local"
+    env_file: .env.local
     environment:
       - NODE_ENV=production
-      - COMPOSE_PROFILES=production
-      # No strictly neded but serving as hints for Coolify
+      # Not strictly neded but serving as hints for Coolify
       - PORT=5173
-      - GROQ_API_KEY=${GROQ_API_KEY}
-      - OPENAI_API_KEY=${OPENAI_API_KEY}
-      - ANTHROPIC_API_KEY=${ANTHROPIC_API_KEY}
-      - OPEN_ROUTER_API_KEY=${OPEN_ROUTER_API_KEY}
-      - GOOGLE_GENERATIVE_AI_API_KEY=${GOOGLE_GENERATIVE_AI_API_KEY}
-      - OLLAMA_API_BASE_URL=${OLLAMA_API_BASE_URL}
+    #  - GROQ_API_KEY=${GROQ_API_KEY}
+    #  - OPENAI_API_KEY=${OPENAI_API_KEY}
+    #  - ANTHROPIC_API_KEY=${ANTHROPIC_API_KEY}
+    #  - OPEN_ROUTER_API_KEY=${OPEN_ROUTER_API_KEY}
+    #  - GOOGLE_GENERATIVE_AI_API_KEY=${GOOGLE_GENERATIVE_AI_API_KEY}
+    #  - OLLAMA_API_BASE_URL=${OLLAMA_API_BASE_URL}
       - VITE_LOG_LEVEL=${VITE_LOG_LEVEL:-debug}
     command: pnpm run dockerstart
     profiles:
@@ -28,16 +27,16 @@ services:
     image: bolt-ai:development
     build:
       target: bolt-ai-development
+    env_file: .env.local
     environment:
       - NODE_ENV=development
-      - COMPOSE_PROFILES=development
       - PORT=5173
-      - GROQ_API_KEY=${GROQ_API_KEY}
-      - OPENAI_API_KEY=${OPENAI_API_KEY}
-      - ANTHROPIC_API_KEY=${ANTHROPIC_API_KEY}
-      - OPEN_ROUTER_API_KEY=${OPEN_ROUTER_API_KEY}
-      - GOOGLE_GENERATIVE_AI_API_KEY=${GOOGLE_GENERATIVE_AI_API_KEY}
-      - OLLAMA_API_BASE_URL=${OLLAMA_API_BASE_URL}
+    #  - GROQ_API_KEY=${GROQ_API_KEY}
+    #  - OPENAI_API_KEY=${OPENAI_API_KEY}
+    #  - ANTHROPIC_API_KEY=${ANTHROPIC_API_KEY}
+    #  - OPEN_ROUTER_API_KEY=${OPEN_ROUTER_API_KEY}
+    #  - GOOGLE_GENERATIVE_AI_API_KEY=${GOOGLE_GENERATIVE_AI_API_KEY}
+    #  - OLLAMA_API_BASE_URL=${OLLAMA_API_BASE_URL}
       - VITE_LOG_LEVEL=${VITE_LOG_LEVEL:-debug}
     volumes:
       - .:/app
