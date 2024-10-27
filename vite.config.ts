@@ -37,14 +37,14 @@ export default defineConfig((config) => {
       chrome129IssuePlugin(),
       config.mode === 'production' && optimizeCssModules({ apply: 'build' }),
     ],
-    envPrefix:["VITE_"],
-    define: {
+    envPrefix:["VITE_","OLLAMA_API_BASE_URL"],
+//    define: {
       'import.meta.env': processEnv, // Forcibly gab from env.local
 //      'process.env': processEnv,
 //      'import.meta.env.OPENAI_LIKE_API_BASE_URL': JSON.stringify(process.env.OPENAI_LIKE_API_BASE_URL),
-//      'import.meta.env.OLLAMA_API_BASE_URL': JSON.stringify(process.env.OLLAMA_API_BASE_URL),
+//      'import.meta.env.OLLAMA_API_BASE_URL': process.env.OLLAMA_API_BASE_URL,
       // Add other non-prefixed variables here as needed
-    },
+//    },
     css: {
       preprocessorOptions: {
         scss: {
