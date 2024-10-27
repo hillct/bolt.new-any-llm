@@ -12,12 +12,13 @@ services:
       - NODE_ENV=production
       # Not strictly neded but serving as hints for Coolify
       - PORT=5173
-    #  - GROQ_API_KEY=${GROQ_API_KEY}
-    #  - OPENAI_API_KEY=${OPENAI_API_KEY}
-    #  - ANTHROPIC_API_KEY=${ANTHROPIC_API_KEY}
-    #  - OPEN_ROUTER_API_KEY=${OPEN_ROUTER_API_KEY}
-    #  - GOOGLE_GENERATIVE_AI_API_KEY=${GOOGLE_GENERATIVE_AI_API_KEY}
-    #  - OLLAMA_API_BASE_URL=${OLLAMA_API_BASE_URL}
+      - GROQ_API_KEY
+      - OPENAI_API_KEY
+      - ANTHROPIC_API_KEY
+      - OPEN_ROUTER_API_KEY
+      - GOOGLE_GENERATIVE_AI_API_KEY
+      - OLLAMA_API_BASE_URL
+      - VITE_OLLAMA_API_BASE_URL
       - VITE_LOG_LEVEL=${VITE_LOG_LEVEL:-debug}
     command: pnpm run dockerstart
     profiles:
@@ -31,12 +32,13 @@ services:
     environment:
       - NODE_ENV=development
       - PORT=5173
-    #  - GROQ_API_KEY=${GROQ_API_KEY}
-    #  - OPENAI_API_KEY=${OPENAI_API_KEY}
-    #  - ANTHROPIC_API_KEY=${ANTHROPIC_API_KEY}
-    #  - OPEN_ROUTER_API_KEY=${OPEN_ROUTER_API_KEY}
-    #  - GOOGLE_GENERATIVE_AI_API_KEY=${GOOGLE_GENERATIVE_AI_API_KEY}
-    #  - OLLAMA_API_BASE_URL=${OLLAMA_API_BASE_URL}
+      - GROQ_API_KEY
+      - OPENAI_API_KEY
+      - ANTHROPIC_API_KEY
+      - OPEN_ROUTER_API_KEY
+      - GOOGLE_GENERATIVE_AI_API_KEY
+      - OLLAMA_API_BASE_URL
+      - VITE_OLLAMA_API_BASE_URL
       - VITE_LOG_LEVEL=${VITE_LOG_LEVEL:-debug}
     volumes:
       - .:/app

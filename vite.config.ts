@@ -1,11 +1,21 @@
 import { cloudflareDevProxyVitePlugin as remixCloudflareDevProxy, vitePlugin as remixVitePlugin } from '@remix-run/dev';
 import UnoCSS from 'unocss/vite';
-import { defineConfig, type ViteDevServer } from 'vite';
+import { defineConfig, type ViteDevServer, loadEnv } from 'vite';
 import { nodePolyfills } from 'vite-plugin-node-polyfills';
 import { optimizeCssModules } from 'vite-plugin-optimize-css-modules';
 import tsconfigPaths from 'vite-tsconfig-paths';
 
 export default defineConfig((config) => {
+  // Load app-level env vars to node-level env vars.
+  const envLocal = loadEnv(config.mode, process.cwd(), '.env.local');
+    // Set each variable only if it is undefined or an empty string
+    const processEnv = Object.fromEntries(
+      Object.entries(envLocal).map(([key, value]) => [
+        key,
+        process.env[key] === undefined || process.env[key] === '' ? value : process.env[key],
+      ])
+    );
+
   return {
     build: {
       target: 'esnext',
@@ -27,7 +37,14 @@ export default defineConfig((config) => {
       chrome129IssuePlugin(),
       config.mode === 'production' && optimizeCssModules({ apply: 'build' }),
     ],
-    envPrefix:["VITE_","OPENAI_LIKE_API_","OLLAMA_API_BASE_URL"],
+    envPrefix:["VITE_"],
+    define: {
+      'import.meta.env': processEnv, // Forcibly gab from env.local
+//      'process.env': processEnv,
+//      'import.meta.env.OPENAI_LIKE_API_BASE_URL': JSON.stringify(process.env.OPENAI_LIKE_API_BASE_URL),
+//      'import.meta.env.OLLAMA_API_BASE_URL': JSON.stringify(process.env.OLLAMA_API_BASE_URL),
+      // Add other non-prefixed variables here as needed
+    },
     css: {
       preprocessorOptions: {
         scss: {
